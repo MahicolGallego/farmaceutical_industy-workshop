@@ -10,6 +10,9 @@
   - `attributes`: Columnas a seleccionar.
   - `include`: Joins y asociaciones.
 - **Consultas Complejas:** Sí, se puede usar el parámetro `include` para realizar joins.
+- **Retorno:** Devuelve una promesa que se resuelve en un array de instancias de modelo (Model) que cumplen con los criterios especificados. Si no hay registros que coincidan, se devuelve un array vacío.
+- **En caso de fallo:** Lanza una excepción (error) si ocurre algún problema, como problemas de conexión o errores en la consulta.
+- **En caso de no encontrar nada:** Devuelve un array vacío ([]).
 
   ```javascript
   const users = await User.findAll({
@@ -23,6 +26,9 @@
 - **Descripción:** Recupera una única instancia que coincida con los criterios de búsqueda.
 - **Parámetros:** Similar a `findAll`, con opciones como `where`, `attributes`, `include`.
 - **Consultas Complejas:** Sí, soporta joins mediante el parámetro `include`.
+- **Retorno:** Devuelve una promesa que se resuelve en una instancia de modelo (Model) que cumple con los criterios especificados. Si no se encuentra ninguna instancia, se devuelve null.
+- **En caso de fallo:** Lanza una excepción si ocurre un error en la consulta o conexión.
+- **En caso de no encontrar nada:** Devuelve null.
 
   ```javascript
   const user = await User.findOne({
@@ -36,6 +42,9 @@
 - **Descripción:** Recupera una instancia por su clave primaria.
 - **Parámetros:** La clave primaria del registro.
 - **Consultas Complejas:** No, solo busca por clave primaria.
+- **Retorno:** Devuelve una promesa que se resuelve en una instancia de modelo (Model) con la clave primaria especificada. Si no se encuentra ninguna instancia, se devuelve null.
+- **En caso de fallo:** Lanza una excepción si hay un problema con la consulta o conexión.
+- **En caso de no encontrar nada:** Devuelve null.
 
   ```javascript
   const user = await User.findByPk(1);
@@ -46,6 +55,8 @@
 - **Descripción:** Crea una nueva instancia en la base de datos.
 - **Parámetros:** Un objeto con los datos a guardar.
 - **Consultas Complejas:** No, solo inserta datos.
+- **Retorno:** Devuelve una promesa que se resuelve en una instancia de modelo (Model) que representa el nuevo registro creado.
+- **En caso de fallo:** Devuelve null.
 
   ```javascript
   const newUser = await User.create({ name: 'John Doe', isActive: true });
@@ -56,16 +67,23 @@
 - **Descripción:** Actualiza una o más instancias que coinciden con los criterios de búsqueda.
 - **Parámetros:** Un objeto con los campos a actualizar y un objeto `where` para definir qué registros actualizar.
 - **Consultas Complejas:** No, solo actualiza datos.
+- **Retorno:** Devuelve una promesa que se resuelve en un array con dos elementos:
+  - Número de registros afectados: Un número entero que indica cuántos registros fueron actualizados.
+- **En caso de fallo:** Lanza una excepción si ocurre un problema durante la actualización, como errores de conexión o problemas con la consulta.
+- **En caso de no encontrar nada:** Devuelve un array con el primer elemento siendo el número de registros afectados. Si ningún registro coincide con los criterios, el número de registros afectados será 0.
 
-  ```javascript
-  await User.update({ isActive: false }, { where: { id: 1 } });
-  ```
+```javascript
+await User.update({ isActive: false }, { where: { id: 1 } });
+```
 
 ### 6. `destroy`
 
 - **Descripción:** Elimina una o más instancias que coinciden con los criterios de búsqueda.
 - **Parámetros:** Un objeto `where` para definir qué registros eliminar.
 - **Consultas Complejas:** No, solo elimina datos.
+- **Retorno:** Devuelve una promesa que se resuelve en un número entero que indica cuántos registros fueron eliminados.
+- **En caso de fallo:** Lanza una excepción si hay un problema durante la eliminación, como errores de conexión o problemas con la consulta.
+- **En caso de no encontrar nada:** Devuelve el número de registros eliminados. Si ningún registro coincide con los criterios, el número de registros eliminados será 0.
 
   ```javascript
   await User.destroy({ where: { id: 1 } });
@@ -76,6 +94,9 @@
 - **Descripción:** Cuenta el número de registros que coinciden con los criterios de búsqueda.
 - **Parámetros:** Un objeto con opciones como `where` para filtrar los registros.
 - **Consultas Complejas:** Sí, permite contar con condiciones y joins.
+- **Retorno:** Devuelve una promesa que se resuelve en un número entero que indica cuántos registros coinciden con los criterios de búsqueda.
+- **En caso de fallo:** Lanza una excepción si ocurre un problema con la consulta o conexión.
+- **En caso de no encontrar nada:** Devuelve 0, indicando que no hay registros que coincidan con los criterios.
 
   ```javascript
   const userCount = await User.count({ where: { isActive: true } });
@@ -89,6 +110,9 @@
   - **Función de Agregación:** La función de agregación a aplicar (e.g., `COUNT`, `SUM`, `AVG`).
   - **Opciones:** Un objeto con condiciones, agrupamientos, y otras configuraciones.
 - **Consultas Complejas:** Sí, permite realizar agregaciones con filtros.
+- **Retorno:** Devuelve una promesa que se resuelve en el resultado de la función de agregación. El resultado depende de la función de agregación utilizada (e.g., un número en el caso de COUNT o SUM).
+- **En caso de fallo:** Lanza una excepción si ocurre un problema con la consulta de agregación.
+- **En caso de no encontrar nada:** Devuelve el resultado de la función de agregación, que puede ser null o 0 dependiendo de la función utilizada (e.g., COUNT devuelve 0 si no hay registros).
 
   ```javascript
   const totalUsers = await User.aggregate('age', 'AVG', {

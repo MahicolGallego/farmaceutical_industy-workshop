@@ -79,3 +79,12 @@ export class Patient extends Model {
 // 		timestamps: false,
 // 	},
 // );
+
+//Relaciones sin decoradores
+
+// userId: {
+//     type: DataTypes.INTEGER,
+//     references: {
+//       model: User, // referencia al modelo User
+//       key: 'id'    // la clave primaria del modelo User
+//     }

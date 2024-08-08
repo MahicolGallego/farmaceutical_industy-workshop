@@ -3,6 +3,6 @@ import { medicationRouter } from './medicationRouter';
 
 const routes: Router = Router();
 
-routes.use('/', medicationRouter);
+routes.use('/medications', medicationRouter);
 
 export default routes;

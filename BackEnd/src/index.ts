@@ -1,3 +1,5 @@
+import 'reflect-metadata'; // Debe ser la primera importación
+import cors from 'cors';
 import express, { Application } from 'express';
 import { errorHandler } from './middlewares/error.handler';
 import dotenv from 'dotenv';
@@ -9,6 +11,7 @@ dotenv.config();
 const app: Application = express();
 const PORT = process.env.PORT || 4000;
 
+app.use(cors());
 app.use(express.json());
 app.use('/api', mainRouter);
 app.use(errorHandler);

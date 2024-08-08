@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Farmaceutical Industry WorkShop</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="app">
+      <h1>Farmaceutical Industry</h1>
+
+      <label for="">Agregar medicamento!</label>
+      <br>
+      <input type="text" id="name-medication" placeholder="nombre del medicamento..." />
+      <br>
+      <input type="number" id="medication-quantity" placeholder="cantidad de stock..." />
+      <br>
+      <label for="">Fecha de caducidad</label>
+      <input type="date" id="medication-expiration-date"/>
+      <br>
+      <input type="number" id="medication-price" placeholder="precio..." />
+      <br>
+      <button id="fetch-add-medication-button">Añadir medicamento!</button>
+      <br>
+
+      <label for="">Ver todos los medicamentos!</label>
+      <br>
+      <button id="fetch-all-medications-button">Ver todos los medicamentos</button>
+      <br>
+
+      <label for="">Actualizar stock!</label>
+      <br>
+      <select name="update-stock" id="select-medication">
+        <option selected disabled value="">--- Seleccionar Medicamento ---</option>
+      </select>
+      <input type="number" id="new-stock" placeholder="ingresa la nueva cantidad..." />
+      <button id="fetch-update-stock-button">Actualizar Stock</button>
+      <br />
+
+      <label for="">Eliminar medicamentos!</label>
+      <br>
+      <button id="fetch-delete-expirated-button">Eliminar medicamentos caducados</button>
+      <br>
+      <!-- <select name="search_type" id="select-category">
+        <option selected value="">--- Buscar por categoria ---</option>
+        <option value="1">Ropa</option>
+        <option value="2">Electronica</option>
+        <option value="3">Muebleria</option>
+        <option value="4">Zapatos</option>
+        <option value="5">Miscelaneos</option>
+      </select>
+      <button id="category-filter-button">Filtrar!</button>
+      <br />
+      <input type="text" placeholder="Buscar por nombre" />
+      <button id="name-filter-button">Buscar!</button> -->
+      <table></table>
+      <div id="error-message"></div>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
